@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>next-headless — dev</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d1117; color: #c9d1d9;
+      min-height: 100vh; text-align: center; padding: 2rem;
+    }
+    .hero {
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      min-height: 100vh;
+    }
+    h1 { font-size: 3rem; color: #58a6ff; letter-spacing: -1px; }
+    .sub { font-size: 1.2rem; color: #8b949e; margin: 0.5rem 0 1.5rem; }
+    .stack { font-size: 1rem; color: #7ee787; margin-bottom: 2rem; }
+    .links a {
+      color: #f78166; text-decoration: none;
+      margin: 0 1rem; font-weight: 500;
+    }
+    .links a:hover { text-decoration: underline; }
+    .status {
+      margin-top: 2rem; font-size: 0.85rem; color: #484f58;
+      border-top: 1px solid #21262d; padding-top: 1rem;
+    }
+    #readme {
+      max-width: 700px; margin: 2rem auto;
+      text-align: left; line-height: 1.6;
+      color: #c9d1d9; border-top: 1px solid #21262d;
+      padding-top: 2rem;
+    }
+    #readme a { color: #58a6ff; }
+    #readme h1, #readme h2, #readme h3 { color: #f78166; margin: 1rem 0 0.5rem; }
+    #readme code { background: #161b22; padding: 0.2em 0.4em; border-radius: 4px; }
+    #readme pre { background: #161b22; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>next-headless</h1>
+    <p class="sub">Full-stack web dev</p>
+    <p class="stack">React · Next.js · Node.js · PHP</p>
+    <p class="links">
+      <a href="https://github.com/next-headless">GitHub</a>
+      <a href="mailto:surma.developer@gmail.com">surma.developer@gmail.com</a>
+      <a href="https://t.me/webkey_by">Telegram</a>
+    </p>
+    <p class="status">open for freelance & contracts</p>
+  </div>
+  <div id="readme">Loading...</div>
+
+  <script>
+    fetch('https://api.github.com/repos/next-headless/next-headless.github.io/readme')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('readme').innerHTML = marked.parse(atob(data.content));
+      })
+      .catch(() => {
+        document.getElementById('readme').innerHTML = '';
+      });
+  </script>
+</body>
+</html>
